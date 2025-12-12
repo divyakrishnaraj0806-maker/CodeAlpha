@@ -1,0 +1,123 @@
+/* ✨ Full page gradient background */
+body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #4b79ff, #6ae0ff);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Wrapper to center the chatbot card */
+.wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* 💎 Chatbot container with glass effect */
+.chat-container {
+    width: 420px;
+    height: 600px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0px 8px 25px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.2);
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Title section */
+.header {
+    text-align: center;
+    color: white;
+}
+.header h2 {
+    margin: 0;
+    font-size: 26px;
+}
+.header p {
+    margin: 0;
+    margin-top: 4px;
+    font-size: 14px;
+    color: #e5e5e5;
+}
+
+/* Chat area */
+.chat-box {
+    height: 430px;
+    overflow-y: auto;
+    margin-top: 20px;
+    padding-right: 10px;
+}
+
+/* Chat messages */
+.msg {
+    margin: 10px 0;
+    display: flex;
+}
+.msg span {
+    padding: 12px 16px;
+    border-radius: 20px;
+    max-width: 70%;
+    display: inline-block;
+    line-height: 1.4;
+    animation: popUp 0.3s ease-in-out;
+}
+
+/* User message */
+.user-msg {
+    justify-content: flex-end;
+}
+.user-msg span {
+    background: #d1ffc6;
+    color: #000;
+}
+
+/* Bot message */
+.bot-msg {
+    justify-content: flex-start;
+}
+.bot-msg span {
+    background: #ffffff;
+    color: #000;
+}
+
+/* Input section */
+.input-area {
+    display: flex;
+    margin-top: 12px;
+}
+.input-area input {
+    flex: 1;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+}
+.input-area button {
+    margin-left: 10px;
+    padding: 12px 20px;
+    background: #007bff;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.input-area button:hover {
+    background: #0056d4;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes popUp {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌐 Language Translator</title>
+  <style>
+    /* General styling */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: rgba(0,0,0,0.6);
+      padding: 30px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 600px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      margin-bottom: 15px;
+      font-size: 1rem;
+      resize: none;
+    }
+
+    select {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      margin: 5px;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #ffcc00;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #ffdd33;
+      transform: scale(1.05);
+    }
+
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      min-height: 50px;
+      font-size: 1.1rem;
+      word-wrap: break-word;
+    }
+
+    /* Responsive */
+    @media(max-width: 500px){
+      h2 { font-size: 1.5rem; }
+      textarea { height: 100px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>🌐 Language Translator</h2>
+  
+  <textarea id="textInput" placeholder="Type text here..."></textarea>
+
+  <div>
+    <select id="sourceLang">
+      <option value="en">English</option>
+      <option value="hi">Hindi</option>
+      <option value="es">Spanish</option>
+      <option value="fr">French</option>
+      <option value="de">German</option>
+    </select>
+
+    <select id="targetLang">
+      <option value="hi">Hindi</option>
+      <option value="en">English</option>
+      <option value="es">Spanish</option>
+      <option value="fr">French</option>
+      <option value="de">German</option>
+    </select>
+  </div>
+
+  <button id="translateBtn">Translate 🌟</button>
+
+  <div id="result">Translation will appear here...</div>
+</div>
+
+<script>
+  const translateBtn = document.getElementById("translateBtn");
+  const textInput = document.getElementById("textInput");
+  const sourceLang = document.getElementById("sourceLang");
+  const targetLang = document.getElementById("targetLang");
+  const resultDiv = document.getElementById("result");
+
+  async function translateText(text, from, to) {
+      resultDiv.innerText = "Translating...";
+
+      try {
+          const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${from}|${to}`);
+          const data = await response.json();
+
+          if (data.responseData && data.responseData.translatedText) {
+              resultDiv.innerText = data.responseData.translatedText;
+          } else {
+              resultDiv.innerText = "Translation failed!";
+          }
+      } catch (error) {
+          resultDiv.innerText = "Error: " + error.message;
+      }
+  }
+
+  translateBtn.addEventListener("click", () => {
+      const text = textInput.value.trim();
+      if (!text) {
+          alert("Please enter text to translate.");
+          return;
+      }
+      translateText(text, sourceLang.value, targetLang.value);
+  });
+</script>
+
+</body>
+</html>

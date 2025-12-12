@@ -1,0 +1,25 @@
+[
+    {
+        "question": "What is your return policy?",
+        "answer": "You can return any product within 30 days of purchase."
+    },
+    {
+        "question": "Do you ship worldwide ?",
+        "answer": "Yes, we ship worldwide with additional shipping charges."
+    },
+    {
+        "question": "How can I track my order?",
+        "answer": "After shipping, we send a tracking link to your email."
+    },
+    {
+        "question": "What payment methods do you accept?",
+        "answer": "We accept credit/debit cards, UPI and net banking." 
+    }
+    
+]
+
+
+
+
+
+

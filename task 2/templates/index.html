@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Chatbot - Premium UI</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+
+<body>
+
+<!-- Floating Background Shapes -->
+<div class="shape shape1"></div>
+<div class="shape shape2"></div>
+<div class="shape shape3"></div>
+
+<div class="chat-wrapper">
+    <div class="chat-card">
+
+        <div class="chat-header">
+            <h2>✨ FAQ Chatbot</h2>
+            <p>Your Smart Virtual Assistant</p>
+        </div>
+
+        <div id="chat-box" class="chat-box"></div>
+
+        <div class="input-area">
+            <input id="user-input" type="text" placeholder="Type your question...">
+            <button onclick="sendMessage()"><i data-feather="send"></i></button>
+        </div>
+    </div>
+</div>
+
+<script>
+feather.replace();
+
+function sendMessage() {
+    let input = document.getElementById("user-input");
+    let msg = input.value.trim();
+    
+    if (msg === "") return;
+
+    // User Message
+    document.getElementById("chat-box").innerHTML += 
+        `<div class='msg user-msg animate'><span>${msg}</span></div>`;
+
+    document.getElementById("chat-box").scrollTop =
+        document.getElementById("chat-box").scrollHeight;
+
+    fetch("/get", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({message: msg})
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("chat-box").innerHTML += 
+            `<div class='msg bot-msg animate'><span>${data.reply}</span></div>`;
+
+        document.getElementById("chat-box").scrollTop =
+            document.getElementById("chat-box").scrollHeight;
+    });
+
+    input.value = "";
+}
+</script>
+
+</body>
+</html>
